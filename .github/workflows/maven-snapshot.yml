@@ -21,16 +21,3 @@ jobs:
           distribution: 'adopt'
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-
-      - name: Generate Maven settings
-        uses: s4u/maven-settings-action@v2.4.0
-        with:
-          servers: |
-            [{
-                "id": "ossrh",
-                "username": "${{ secrets.CI_DEPLOY_USERNAME }}",
-                "password": "${{ secrets.CI_DEPLOY_PASSWORD }}"
-            }]
-
-      - name: Deploy Maven Snapshot
-        run: mvn deploy -s /home/runner/.m2/settings.xml
